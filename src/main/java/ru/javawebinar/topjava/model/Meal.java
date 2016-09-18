@@ -4,21 +4,28 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import static ru.javawebinar.topjava.dao.DAOImpl1.counter;
+
 /**
  * GKislin
  * 11.01.2015.
  */
 public class Meal {
     private final LocalDateTime dateTime;
-
+    private int id;
     private final String description;
 
     private final int calories;
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
+        id = counter.incrementAndGet();
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public LocalDateTime getDateTime() {
