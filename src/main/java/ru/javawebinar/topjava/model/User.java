@@ -84,6 +84,10 @@ public class User extends NamedEntity {
         return password;
     }
 
+    public boolean isNew(){
+        return (this.id==null);
+    }
+
     @Override
     public String toString() {
         return "User (" +
