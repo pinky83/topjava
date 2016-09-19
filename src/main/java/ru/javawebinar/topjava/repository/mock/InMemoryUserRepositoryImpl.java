@@ -22,17 +22,17 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(InMemoryUserRepositoryImpl.class);
 
-    //тут захардкодить список юзеров(инициализировать мапу)
+    //тут захардкодить список юзеров(для инициализации мапы)
     {
         List<User> users = Arrays.asList(
                 new User(counter.incrementAndGet(), "Федя Николаев",
-                        "soto12@mail.ru", "torba856dr", Role.ROLE_USER, Role.values()),
+                        "soto12@mail.ru", "torba856dr", Role.ROLE_USER),
                 new User(counter.incrementAndGet(), "Иван Матюшко",
-                        "javauser@hotmail.com", "djnvgj394gr", Role.ROLE_USER, Role.values()),
+                        "javauser@hotmail.com", "djnvgj394gr", Role.ROLE_USER),
                 new User(counter.incrementAndGet(), "Маргарита Строганова",
-                        "margo17@gmail.com", "kiso4ka2345", Role.ROLE_USER, Role.values()),
+                        "margo17@gmail.com", "kiso4ka2345", Role.ROLE_USER),
                 new User(counter.incrementAndGet(), "Иван Сотников",
-                        "vanya1989@ya.ru", "rtl23sderto", Role.ROLE_USER, Role.values())
+                        "vanya1989@ya.ru", "rtl23sderto", Role.ROLE_USER)
         );
 
         users.forEach(this::save);
@@ -67,6 +67,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         LOG.info("getAll");
+        if(repository.values().isEmpty())return Collections.emptyList();
         List<User> result = new ArrayList<>();
         result.addAll(repository.values());
         result.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
@@ -76,15 +77,9 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public User getByEmail(String email) {
         LOG.info("getByEmail " + email);
-        if(!repository.isEmpty())
-            for(User u : repository.values())if (u.getEmail().equalsIgnoreCase(email))return u;
-        return null;
-    }
-
-    //только для тестирования - удалять!
-    public static void main(String...args){
-        new InMemoryUserRepositoryImpl().getAll()
-                .forEach(user -> System.out.println(user.getName()));
-
+        Optional<User> matchingUsers = repository.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+        return matchingUsers.orElse(null);
     }
 }
