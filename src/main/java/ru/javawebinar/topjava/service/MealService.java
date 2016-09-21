@@ -16,7 +16,7 @@ import java.util.List;
 public interface MealService {
     Meal save(Meal meal, User user) throws NotFoundException;
 
-    boolean delete(int id, int userId) throws NotFoundException;
+    void delete(int id, int userId) throws NotFoundException;
 
     Meal get(int id, int userId) throws NotFoundException;
 
