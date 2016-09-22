@@ -2,7 +2,10 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.Role;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.mock.InMemoryMealRepositoryImpl;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
@@ -22,7 +25,8 @@ import java.util.Objects;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
-
+    private User testUser = new User(1, "", "", "", Role.ROLE_USER);//для тестирования - заменять юзером ,
+    // полученным из контекста спринга по айди залогиненого юзера
     private MealRepository repository;
 
     @Override
@@ -38,10 +42,11 @@ public class MealServlet extends HttpServlet {
         Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
-                Integer.valueOf(request.getParameter("calories")), );
+                Integer.valueOf(request.getParameter("calories")), testUser);//для тестирования - заменить на
+        // нормального юзера из контекста спринга
 
         LOG.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        repository.save(meal);
+        repository.save(meal, testUser);
         response.sendRedirect("meals");
     }
 
@@ -51,19 +56,19 @@ public class MealServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("mealList",
-                    MealsUtil.getWithExceeded(repository.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                    MealsUtil.getWithExceeded(repository.getAll(testUser.getId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
 
         } else if ("delete".equals(action)) {
             int id = getId(request);
             LOG.info("Delete {}", id);
-            repository.delete(id);
+            repository.delete(id, testUser.getId());
             response.sendRedirect("meals");
 
         } else if ("create".equals(action) || "update".equals(action)) {
             final Meal meal = action.equals("create") ?
-                    new Meal(LocalDateTime.now().withNano(0).withSecond(0), "", 1000, ) :
-                    repository.get(getId(request));
+                    new Meal(LocalDateTime.now().withNano(0).withSecond(0), "", 1000, testUser) :
+                    repository.get(getId(request), testUser.getId());
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
         }

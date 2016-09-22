@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * GKislin
  * 15.09.2015.
  */
+@Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
     private Map<Integer, Meal> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
