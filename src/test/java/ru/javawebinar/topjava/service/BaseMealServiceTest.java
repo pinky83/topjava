@@ -15,15 +15,18 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import static ru.javawebinar.topjava.MealTestData.*;
+import static ru.javawebinar.topjava.MealTestData.MEAL1;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
-public class MealServiceTest extends BaseServiceTest{
-
-    private static StringBuffer results = new StringBuffer();
+/**
+ * Created by Дмитрий on 15.10.2016.**
+ */
+public abstract class BaseMealServiceTest extends BaseServiceTest{
+    protected static StringBuffer results = new StringBuffer();
 
     @AfterClass
-    public static void printResult() {
+    protected static void printResult() {
         System.out.printf("%nTest             Duration, ms%n");
         System.out.println("-----------------------------");
         System.out.println(results);
@@ -100,4 +103,5 @@ public class MealServiceTest extends BaseServiceTest{
         MATCHER.assertCollectionEquals(Arrays.asList(MEAL3, MEAL2, MEAL1),
                 service.getBetweenDates(LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 30), USER_ID));
     }
+
 }
