@@ -18,7 +18,6 @@ import java.util.List;
  * GKislin
  * 06.03.2015.
  */
-@Profile({Profiles.POSTGRES, Profiles.JPA})
 @Service
 public class UserServiceImpl implements UserService {
 

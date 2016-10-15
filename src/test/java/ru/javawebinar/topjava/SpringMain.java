@@ -1,8 +1,5 @@
 package ru.javawebinar.topjava;
 
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.web.meal.MealRestController;
@@ -18,13 +15,12 @@ import java.util.List;
  * User: gkislin
  * Date: 22.08.2014
  */
-@Profile({Profiles.JPA, Profiles.PRODUCTION})
 public class SpringMain {
     public static void main(String[] args) {
         // java 7 Automatic resource management
         GenericXmlApplicationContext appCtx = new GenericXmlApplicationContext();
         try {
-            appCtx.getEnvironment().setActiveProfiles(Profiles.JPA, Profiles.POSTGRES, Profiles.PRODUCTION);
+            appCtx.getEnvironment().setActiveProfiles(Profiles.DATAJPA, Profiles.POSTGRES, Profiles.PRODUCTION);
             appCtx.load("spring/spring-app.xml", "spring/spring-db.xml");
             appCtx.refresh();
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));

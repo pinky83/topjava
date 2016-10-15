@@ -1,8 +1,6 @@
 package ru.javawebinar.topjava.web.user;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
-import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
  * GKislin
  * 06.03.2015.
  */
-@Profile({Profiles.PRODUCTION, Profiles.JPA, Profiles.POSTGRES})
 @Controller
 public class AdminRestController extends AbstractUserController {
 

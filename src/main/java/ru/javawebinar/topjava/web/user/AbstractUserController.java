@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * User: gkislin
  */
-@Profile({Profiles.PRODUCTION, Profiles.JPA, Profiles.POSTGRES})
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
