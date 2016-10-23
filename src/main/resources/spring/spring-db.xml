@@ -15,8 +15,8 @@
 
     <!-- Change DB by comment/uncomment property-placeholder -->
 
-    <!--<context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>-->
-    <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+    <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+    <!--<context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>-->
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
@@ -98,7 +98,7 @@
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
               p:entityManagerFactory-ref="entityManagerFactory"/>
 
-        <bean class="ru.javawebinar.topjava.repository.JpaUtil"/>
+        <bean class="ru.javawebinar.topjava.repository.jpa.CacheUtilImpl"/>
     </beans>
 
     <beans profile="jpa">
@@ -108,5 +108,11 @@
     <beans profile="datajpa">
         <context:component-scan base-package="ru.javawebinar.**.repository.datajpa"/>
         <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>
+    </beans>
+
+    <beans profile="jdbc">
+        <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+
+        <bean class="ru.javawebinar.topjava.repository.jdbc.JdbcUtil"/>
     </beans>
 </beans>

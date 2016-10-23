@@ -1,16 +1,21 @@
-package ru.javawebinar.topjava.repository;
+package ru.javawebinar.topjava.repository.jpa;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import ru.javawebinar.topjava.repository.CacheUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class JpaUtil {
+/**
+ * Created by Дмитрий on 23.10.2016.**
+ */
+public class CacheUtilImpl implements CacheUtil {
 
     @PersistenceContext
     private EntityManager em;
 
+    @Override
     public void clear2ndLevelHibernateCache() {
         Session s = (Session) em.getDelegate();
         SessionFactory sf = s.getSessionFactory();

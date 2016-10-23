@@ -11,7 +11,7 @@ import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.Profiles.DATAJPA;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 
-@ActiveProfiles(DATAJPA)
+@ActiveProfiles({DATAJPA})
 public class DataJpaMealServiceTest extends AbstractMealServiceTest {
     @Test
     public void testGetWithUser() throws Exception {

@@ -8,9 +8,10 @@ import ru.javawebinar.topjava.service.AbstractUserServiceTest;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import static ru.javawebinar.topjava.Profiles.DATAJPA;
+import static ru.javawebinar.topjava.Profiles.POSTGRES;
 import static ru.javawebinar.topjava.UserTestData.*;
 
-@ActiveProfiles(DATAJPA)
+@ActiveProfiles({POSTGRES,DATAJPA})
 public class DataJpaUserServiceTest extends AbstractUserServiceTest {
     @Test
     public void testGetWithMeals() throws Exception {

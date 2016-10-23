@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
-import ru.javawebinar.topjava.repository.JpaUtil;
+import ru.javawebinar.topjava.repository.CacheUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.Arrays;
@@ -21,12 +21,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     protected UserService service;
 
     @Autowired
-    protected JpaUtil jpaUtil;
+    protected CacheUtil cacheUtil;
 
     @Before
     public void setUp() throws Exception {
         service.evictCache();
-        jpaUtil.clear2ndLevelHibernateCache();
+        cacheUtil.clear2ndLevelHibernateCache();
     }
         
     @Test
