@@ -69,7 +69,7 @@ public class MealRestController extends AbstractMealController {
 
     @GetMapping(value = "/getBetween", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MealWithExceed> getBetween(
-            @RequestParam (value = "startTime ") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam (value = "startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
             @RequestParam (value = "endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
         return super.getBetween(startTime.toLocalDate(), startTime.toLocalTime(), endTime.toLocalDate(), endTime.toLocalTime());
     }
