@@ -9,9 +9,7 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -23,14 +21,6 @@ import java.util.List;
 public class MealRestController extends AbstractMealController {
 
     static final String REST_URL = "/rest/meals";
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate startDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate endDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime startTime;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime endTime;
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public Meal get(@PathVariable("id") int id) {

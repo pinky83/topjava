@@ -78,7 +78,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testCreateWithREsponse() throws Exception {
+    public void testCreateWithResponse() throws Exception {
 
     }
 
