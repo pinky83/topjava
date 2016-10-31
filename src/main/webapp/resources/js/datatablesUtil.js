@@ -47,6 +47,7 @@ function save() {
         data: form.serialize(),
         success: function () {
             $('#editRow').modal('hide');
+            $('#addMeal').modal('hide');
             updateTable();
             successNoty('Saved');
         }
@@ -79,4 +80,11 @@ function failNoty(event, jqXHR, options, jsExc) {
         type: 'error',
         layout: 'bottomRight'
     });
+}
+
+//meals functions
+
+function addMeal() {
+    $('id').val(null);
+    $('#addMeal').modal();
 }
