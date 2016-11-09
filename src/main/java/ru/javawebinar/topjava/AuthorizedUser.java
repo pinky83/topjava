@@ -41,16 +41,6 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         return get().userTo.getId();
     }
 
-    public static AuthorizedUser get() {
-        AuthorizedUser user = safeGet();
-        requireNonNull(user, "No authorized user found");
-        return user;
-    }
-
-    public static int id() {
-        return get().userTo.getId();
-    }
-
     public static int getCaloriesPerDay() {
         return get().userTo.getCaloriesPerDay();
     }

@@ -98,15 +98,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User u = repository.getByEmail(email);
-        if (u == null) {
-            throw new UsernameNotFoundException("User " + email + " is not found");
-        }
-        return new AuthorizedUser(u);
-    }
-
-    @Override
     public User getWithMeals(int id) {
         return ExceptionUtil.checkNotFoundWithId(repository.getWithMeals(id), id);
     }
