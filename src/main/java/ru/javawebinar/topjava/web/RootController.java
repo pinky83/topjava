@@ -48,3 +48,4 @@ public class RootController {
         return "meals";
     }
 }
+
